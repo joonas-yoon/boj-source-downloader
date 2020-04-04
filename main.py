@@ -35,8 +35,10 @@ html = driver.page_source
 soup = BeautifulSoup(html, 'html.parser')
 solved_problems = soup.find_all('span', class_='problem_number')
 solved_pids = [get_text(pid) for pid in solved_problems]
+n_solved = len(solved_pids)
 
-for problem_id in solved_pids:
+for current in range(n_solved):
+    problem_id = solved_pids[current]
     if problem_id in saved_pids:
         print(f'Skipped Problem {problem_id} (reason: already saved)')
     
@@ -74,9 +76,11 @@ for problem_id in solved_pids:
     source_file = f'{problem_id}.{extension}'
     with open(os.path.join(SOURCE_DIR, source_file), 'w') as f:
         f.write(source)
-    print(f'Problem {problem_id}, Submission #{sub_id} ({language_name}) saved')
 
-    time.sleep(random() * 5 + 1)
+    # Print log of process
+    print(f'Saved Problem {problem_id} Submission #{sub_id} ({language_name}) ({current}/{n_solved})')
+
+    time.sleep(random() * 2 + .5)
 print(' '.join(solved_pids))
 
 
