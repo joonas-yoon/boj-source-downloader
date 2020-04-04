@@ -1,68 +1,266 @@
-LANGUAGE = [
-    {'id': 0, 'name': 'C++11', 'ext': 'cpp'},
-    {'id': 1, 'name': 'C++14', 'ext': 'cpp'},
-    {'id': 2, 'name': 'Java', 'ext': 'java'},
-    {'id': 3, 'name': 'Python 3', 'ext': 'py'},
-    {'id': 4, 'name': 'C11', 'ext': 'c'},
-    {'id': 5, 'name': 'PyPy3', 'ext': 'py'},
-    {'id': 6, 'name': 'C', 'ext': 'c'},
-    {'id': 7, 'name': 'C++', 'ext': 'cpp'},
-    {'id': 8, 'name': 'C++17', 'ext': 'cpp'},
-    {'id': 9, 'name': 'Java (OpenJDK)', 'ext': 'java'},
-    {'id': 10, 'name': 'Java 11', 'ext': 'java'},
-    {'id': 11, 'name': 'C++2a', 'ext': 'cpp'},
-    {'id': 12, 'name': 'Python 2', 'ext': 'py'},
-    {'id': 13, 'name': 'PyPy2', 'ext': 'py'},
-    {'id': 14, 'name': 'Ruby 2.5', 'ext': 'rb'},
-    {'id': 15, 'name': 'Kotlin (JVM)', 'ext': 'kt'},
-    {'id': 16, 'name': 'Kotlin (Native)', 'ext': 'kt'},
-    {'id': 17, 'name': 'Swift', 'ext': 'swift'},
-    {'id': 18, 'name': 'Text', 'ext': 'txt'},
-    {'id': 19, 'name': 'C# 6.0', 'ext': 'cs'},
-    {'id': 20, 'name': 'node.js', 'ext': 'js'},
-    {'id': 21, 'name': 'Go', 'ext': 'go'},
-    {'id': 22, 'name': 'D', 'ext': 'd'},
-    {'id': 23, 'name': 'F#', 'ext': 'fs'},
-    {'id': 24, 'name': 'PHP', 'ext': 'php'},
-    {'id': 25, 'name': 'Rust', 'ext': 'rs'},
-    {'id': 26, 'name': 'Rust 2018', 'ext': 'rs'},
-    {'id': 27, 'name': 'Pascal', 'ext': 'pp'},
-    {'id': 28, 'name': 'Lua', 'ext': 'lua'},
-    {'id': 29, 'name': 'Perl', 'ext': 'pl'},
-    {'id': 30, 'name': 'R', 'ext': 'r'},
-    {'id': 31, 'name': 'Objective-C', 'ext': 'm'},
-    {'id': 32, 'name': 'Objective-C++', 'ext': 'mm'},
-    {'id': 33, 'name': 'C (Clang)', 'ext': 'clang'},
-    {'id': 34, 'name': 'C++ (Clang)', 'ext': 'clang'},
-    {'id': 35, 'name': 'C++11 (Clang)', 'ext': 'clang'},
-    {'id': 36, 'name': 'C++14 (Clang)', 'ext': 'clang'},
-    {'id': 37, 'name': 'C11 (Clang)', 'ext': 'clang'},
-    {'id': 38, 'name': 'C++17 (Clang)', 'ext': 'clang'},
-    {'id': 39, 'name': 'C++2a (Clang)', 'ext': 'clang'},
-    {'id': 40, 'name': 'Golfscript', 'ext': 'gs'},
-    {'id': 41, 'name': 'Assembly (32bit)', 'ext': 'asm'},
-    {'id': 42, 'name': 'Assembly (64bit)', 'ext': 'asm'},
-    {'id': 43, 'name': 'VB.NET 4.0', 'ext': 'vb'},
-    {'id': 44, 'name': 'Bash', 'ext': 'sh'},
-    {'id': 45, 'name': 'Fortran', 'ext': 'f'},
-    {'id': 46, 'name': 'Scheme', 'ext': 'scm'},
-    {'id': 47, 'name': 'Ada', 'ext': 'ada'},
-    {'id': 48, 'name': 'awk', 'ext': 'awk'},
-    {'id': 49, 'name': 'OCaml', 'ext': 'ml'},
-    {'id': 50, 'name': 'Brainf**k', 'ext': 'bf'},
-    {'id': 51, 'name': 'Whitespace', 'ext': 'txt'},
-    {'id': 52, 'name': 'Tcl', 'ext': 'tcl'},
-    {'id': 53, 'name': 'Rhino', 'ext': ''},
-    {'id': 54, 'name': 'Cobol', 'ext': 'cbl'},
-    {'id': 55, 'name': 'Pike', 'ext': ''},
-    {'id': 56, 'name': 'sed', 'ext': 'txt'},
-    {'id': 57, 'name': 'Boo', 'ext': 'boo'},
-    {'id': 58, 'name': 'INTERCAL', 'ext': ''},
-    {'id': 59, 'name': 'bc', 'ext': 'txt'},
-    {'id': 60, 'name': 'Cobra', 'ext': ''},
-    {'id': 61, 'name': 'Algol 68', 'ext': ''},
-    {'id': 62, 'name': 'Befunge', 'ext': ''},
-    {'id': 63, 'name': 'Haxe', 'ext': ''},
-    {'id': 64, 'name': 'LOLCODE', 'ext': ''},
-    {'id': 65, 'name': '아희', 'ext': 'aheui'}
-]
+LANGUAGE = {
+  'C++11': {
+    'ext': 'cpp',
+    'id': 0
+  },
+  'C++14': {
+    'ext': 'cpp',
+    'id': 1
+  },
+  'Java': {
+    'ext': 'java',
+    'id': 2
+  },
+  'Python 3': {
+    'ext': 'py',
+    'id': 3
+  },
+  'C11': {
+    'ext': 'c',
+    'id': 4
+  },
+  'PyPy3': {
+    'ext': 'py',
+    'id': 5
+  },
+  'C': {
+    'ext': 'c',
+    'id': 6
+  },
+  'C++': {
+    'ext': 'cpp',
+    'id': 7
+  },
+  'C++17': {
+    'ext': 'cpp',
+    'id': 8
+  },
+  'Java (OpenJDK)': {
+    'ext': 'java',
+    'id': 9
+  },
+  'Java 11': {
+    'ext': 'java',
+    'id': 10
+  },
+  'C++2a': {
+    'ext': 'cpp',
+    'id': 11
+  },
+  'Python 2': {
+    'ext': 'py',
+    'id': 12
+  },
+  'PyPy2': {
+    'ext': 'py',
+    'id': 13
+  },
+  'Ruby 2.5': {
+    'ext': 'rb',
+    'id': 14
+  },
+  'Kotlin (JVM)': {
+    'ext': 'kt',
+    'id': 15
+  },
+  'Kotlin (Native)': {
+    'ext': 'kt',
+    'id': 16
+  },
+  'Swift': {
+    'ext': 'swift',
+    'id': 17
+  },
+  'Text': {
+    'ext': 'txt',
+    'id': 18
+  },
+  'C# 6.0': {
+    'ext': 'cs',
+    'id': 19
+  },
+  'node.js': {
+    'ext': 'js',
+    'id': 20
+  },
+  'Go': {
+    'ext': 'go',
+    'id': 21
+  },
+  'D': {
+    'ext': 'd',
+    'id': 22
+  },
+  'F#': {
+    'ext': 'fs',
+    'id': 23
+  },
+  'PHP': {
+    'ext': 'php',
+    'id': 24
+  },
+  'Rust': {
+    'ext': 'rs',
+    'id': 25
+  },
+  'Rust 2018': {
+    'ext': 'rs',
+    'id': 26
+  },
+  'Pascal': {
+    'ext': 'pp',
+    'id': 27
+  },
+  'Lua': {
+    'ext': 'lua',
+    'id': 28
+  },
+  'Perl': {
+    'ext': 'pl',
+    'id': 29
+  },
+  'R': {
+    'ext': 'r',
+    'id': 30
+  },
+  'Objective-C': {
+    'ext': 'm',
+    'id': 31
+  },
+  'Objective-C++': {
+    'ext': 'mm',
+    'id': 32
+  },
+  'C (Clang)': {
+    'ext': 'clang',
+    'id': 33
+  },
+  'C++ (Clang)': {
+    'ext': 'clang',
+    'id': 34
+  },
+  'C++11 (Clang)': {
+    'ext': 'clang',
+    'id': 35
+  },
+  'C++14 (Clang)': {
+    'ext': 'clang',
+    'id': 36
+  },
+  'C11 (Clang)': {
+    'ext': 'clang',
+    'id': 37
+  },
+  'C++17 (Clang)': {
+    'ext': 'clang',
+    'id': 38
+  },
+  'C++2a (Clang)': {
+    'ext': 'clang',
+    'id': 39
+  },
+  'Golfscript': {
+    'ext': 'gs',
+    'id': 40
+  },
+  'Assembly (32bit)': {
+    'ext': 'asm',
+    'id': 41
+  },
+  'Assembly (64bit)': {
+    'ext': 'asm',
+    'id': 42
+  },
+  'VB.NET 4.0': {
+    'ext': 'vb',
+    'id': 43
+  },
+  'Bash': {
+    'ext': 'sh',
+    'id': 44
+  },
+  'Fortran': {
+    'ext': 'f',
+    'id': 45
+  },
+  'Scheme': {
+    'ext': 'scm',
+    'id': 46
+  },
+  'Ada': {
+    'ext': 'ada',
+    'id': 47
+  },
+  'awk': {
+    'ext': 'awk',
+    'id': 48
+  },
+  'OCaml': {
+    'ext': 'ml',
+    'id': 49
+  },
+  'Brainf**k': {
+    'ext': 'bf',
+    'id': 50
+  },
+  'Whitespace': {
+    'ext': 'txt',
+    'id': 51
+  },
+  'Tcl': {
+    'ext': 'tcl',
+    'id': 52
+  },
+  'Rhino': {
+    'ext': '',
+    'id': 53
+  },
+  'Cobol': {
+    'ext': 'cbl',
+    'id': 54
+  },
+  'Pike': {
+    'ext': '',
+    'id': 55
+  },
+  'sed': {
+    'ext': 'txt',
+    'id': 56
+  },
+  'Boo': {
+    'ext': 'boo',
+    'id': 57
+  },
+  'INTERCAL': {
+    'ext': '',
+    'id': 58
+  },
+  'bc': {
+    'ext': 'txt',
+    'id': 59
+  },
+  'Cobra': {
+    'ext': '',
+    'id': 60
+  },
+  'Algol 68': {
+    'ext': '',
+    'id': 61
+  },
+  'Befunge': {
+    'ext': '',
+    'id': 62
+  },
+  'Haxe': {
+    'ext': '',
+    'id': 63
+  },
+  'LOLCODE': {
+    'ext': '',
+    'id': 64
+  },
+  '아희': {
+    'ext': 'aheui',
+    'id': 65
+  },
+}

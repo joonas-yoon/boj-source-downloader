@@ -64,9 +64,8 @@ for problem_id in solved_pids:
     source = get_text(soup.find('textarea', {'name': 'source'}))
 
     # Detect file extension
-    language_id = int(soup.find(id='language').get('value'))
-    language_name = meta.LANGUAGE[language_id]['name']
-    extension = meta.LANGUAGE[language_id]['ext']
+    language_name = get_text(soup.find('table', class_='table').find_all('tr')[1].find_all('td')[7])
+    extension = meta.LANGUAGE[language_name]['ext']
     if not extension:
         print(f'[Warn] Can not detected ext of {language_name}. it saved as .txt')
         extension = 'txt'
