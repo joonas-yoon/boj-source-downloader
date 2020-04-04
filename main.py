@@ -68,13 +68,13 @@ for current in range(n_solved):
 
     # Detect file extension
     language_name = get_text(soup.find('table', class_='table').find_all('tr')[1].find_all('td')[7])
-    detect_failed = not language_name in meta.LANGUAGE
+    detect_failed = not language_name in meta.LANGUAGE_EXTENSION
     if not detect_failed:
-        extension = meta.LANGUAGE[language_name]['ext']
+        extension = meta.LANGUAGE_EXTENSION[language_name]
         detect_failed = not extension
     if detect_failed:
-        print(f'[Warn] Can not detected ext of {language_name}. it saved as .txt')
-        extension = 'txt'
+        print(f'[Warn] Can not detected ext of {language_name}. it saved as .unknown')
+        extension = 'unknown'
 
     # Save as file
     source_file = f'{problem_id}.{extension}'
@@ -85,7 +85,6 @@ for current in range(n_solved):
     print(f'Saved Problem {problem_id} Submission #{sub_id} ({language_name}) ({current}/{n_solved})')
 
     time.sleep(random() * 2 + .5)
-print(' '.join(solved_pids))
 
 
 time.sleep(10)
