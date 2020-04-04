@@ -1,5 +1,6 @@
 import time
 import os
+import meta
 
 from bs4 import BeautifulSoup
 from os.path import isfile, join
@@ -62,10 +63,19 @@ for problem_id in solved_pids:
     soup = BeautifulSoup(html, 'html.parser')
     source = get_text(soup.find('textarea', {'name': 'source'}))
 
+    # Detect file extension
+    language_id = int(soup.find(id='language').get('value'))
+    language_name = meta.LANGUAGE[language_id]['name']
+    extension = meta.LANGUAGE[language_id]['ext']
+    if not extension:
+        print(f'[Warn] Can not detected ext of {language_name}. it saved as .txt')
+        extension = 'txt'
+
     # Save as file
-    with open(os.path.join(SOURCE_DIR, f'{problem_id}.txt'), 'w') as f:
+    source_file = f'{problem_id}.{extension}'
+    with open(os.path.join(SOURCE_DIR, source_file), 'w') as f:
         f.write(source)
-    print(f'Problem {problem_id}, Submission #{sub_id} saved')
+    print(f'Problem {problem_id}, Submission #{sub_id} ({language_name}) saved')
 
     time.sleep(random() * 5 + 1)
 print(' '.join(solved_pids))
