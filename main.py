@@ -41,6 +41,7 @@ for current in range(n_solved):
     problem_id = solved_pids[current]
     if problem_id in saved_pids:
         print(f'Skipped Problem {problem_id} (reason: already saved)')
+        continue
     
     # List of accepted submissions
     driver.get(f'https://www.acmicpc.net/status?problem_id={problem_id}&user_id={username}&result_id=4&from_mine=1')
@@ -67,8 +68,11 @@ for current in range(n_solved):
 
     # Detect file extension
     language_name = get_text(soup.find('table', class_='table').find_all('tr')[1].find_all('td')[7])
-    extension = meta.LANGUAGE[language_name]['ext']
-    if not extension:
+    detect_failed = not language_name in meta.LANGUAGE
+    if not detect_failed:
+        extension = meta.LANGUAGE[language_name]['ext']
+        detect_failed = not extension
+    if detect_failed:
         print(f'[Warn] Can not detected ext of {language_name}. it saved as .txt')
         extension = 'txt'
 
