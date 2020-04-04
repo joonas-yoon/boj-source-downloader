@@ -1,15 +1,21 @@
 import time
+import os
 
 from bs4 import BeautifulSoup
+from os.path import isfile, join
+from random import random
 from util import Chrome, get_text
+
+SOURCE_DIR = os.path.join('sources')
+source_files = [f for f in os.listdir(SOURCE_DIR) if isfile(join(SOURCE_DIR, f))]
+saved_pids = set([os.path.splitext(f)[0] for f in source_files])
 
 driver = Chrome().get_driver()
 driver.implicitly_wait(3)
 
-url = 'https://www.acmicpc.net/login'
-driver.get(url)
+driver.get('https://www.acmicpc.net/login')
 
-username = ''
+username = None
 while not username:
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
@@ -28,9 +34,40 @@ html = driver.page_source
 soup = BeautifulSoup(html, 'html.parser')
 solved_problems = soup.find_all('span', class_='problem_number')
 solved_pids = [get_text(pid) for pid in solved_problems]
-for pid in solved_pids:
-    driver.get(f'https://www.acmicpc.net/status?problem_id={pid}&user_id={username}&result_id=4&from_mine=1')
-    time.sleep(10)
+
+for problem_id in solved_pids:
+    if problem_id in saved_pids:
+        print(f'Skipped Problem {problem_id} (reason: already saved)')
+    
+    # List of accepted submissions
+    driver.get(f'https://www.acmicpc.net/status?problem_id={problem_id}&user_id={username}&result_id=4&from_mine=1')
+
+    # Get latest submission id
+    html = driver.page_source
+    soup = BeautifulSoup(html, 'html.parser')
+    submissions = soup.find(id='status-table').find_all('tr')
+    sub_id = None
+    for sub in submissions:
+        sub_id = sub.get('id')
+        if sub_id:
+            sub_id = sub_id.replace('solution-', '')
+            break
+
+    if sub_id is None:
+        continue
+
+    # Get page of latest source
+    driver.get(f'https://www.acmicpc.net/source/{sub_id}')
+    html = driver.page_source
+    soup = BeautifulSoup(html, 'html.parser')
+    source = get_text(soup.find('textarea', {'name': 'source'}))
+
+    # Save as file
+    with open(os.path.join(SOURCE_DIR, f'{problem_id}.txt'), 'w') as f:
+        f.write(source)
+    print(f'Problem {problem_id}, Submission #{sub_id} saved')
+
+    time.sleep(random() * 5 + 1)
 print(' '.join(solved_pids))
 
 
