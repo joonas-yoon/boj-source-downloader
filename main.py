@@ -1,7 +1,7 @@
 import time
 
-from util import Chrome, get_text
 from bs4 import BeautifulSoup
+from util import Chrome, get_text
 
 driver = Chrome().get_driver()
 driver.implicitly_wait(3)
@@ -21,6 +21,18 @@ while not username:
     time.sleep(5)
 
 print("Logined!")
+
+
+driver.get(f'https://www.acmicpc.net/user/{username}')
+html = driver.page_source
+soup = BeautifulSoup(html, 'html.parser')
+solved_problems = soup.find_all('span', class_='problem_number')
+solved_pids = [get_text(pid) for pid in solved_problems]
+for pid in solved_pids:
+    driver.get(f'https://www.acmicpc.net/status?problem_id={pid}&user_id={username}&result_id=4&from_mine=1')
+    time.sleep(10)
+print(' '.join(solved_pids))
+
 
 time.sleep(10)
 driver.quit()
