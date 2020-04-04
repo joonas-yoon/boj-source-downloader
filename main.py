@@ -78,7 +78,7 @@ for current in range(n_solved):
 
     # Save as file
     source_file = f'{problem_id}.{extension}'
-    with open(os.path.join(SOURCE_DIR, source_file), 'w') as f:
+    with open(os.path.join(SOURCE_DIR, source_file), 'w', encoding='utf-8') as f:
         f.write(source)
 
     # Print log of process
