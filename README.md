@@ -1,5 +1,7 @@
 # BOJ source saver
 
+![Python application](https://github.com/joonas-yoon/boj-source-saver/workflows/Python%20application/badge.svg)
+
 Save your ACCEPTED codes on [BOJ](https://www.acmicpc.net)
 
 ## Requirements
