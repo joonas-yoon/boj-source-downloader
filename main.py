@@ -8,6 +8,8 @@ from random import random
 from util import Chrome, get_text
 
 SOURCE_DIR = os.path.join('sources')
+if not os.path.isdir(SOURCE_DIR):
+    os.mkdir(SOURCE_DIR)
 source_files = [f for f in os.listdir(SOURCE_DIR) if isfile(join(SOURCE_DIR, f))]
 saved_pids = set([os.path.splitext(f)[0] for f in source_files])
 
