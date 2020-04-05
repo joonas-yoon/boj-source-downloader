@@ -64,7 +64,7 @@ for current in range(n_solved):
     driver.get(f'https://www.acmicpc.net/source/{sub_id}')
     html = driver.page_source
     soup = BeautifulSoup(html, 'html.parser')
-    source = get_text(soup.find('textarea', {'name': 'source'}))
+    source = '\n'.join([get_text(line) for line in soup.find_all('pre', class_='CodeMirror-line')])
 
     # Detect file extension
     language_name = get_text(soup.find('table', class_='table').find_all('tr')[1].find_all('td')[7])
