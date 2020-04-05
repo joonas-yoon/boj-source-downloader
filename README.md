@@ -1,8 +1,8 @@
-# BOJ source saver
+# BOJ source downloader
 
-![Python application](https://github.com/joonas-yoon/boj-source-saver/workflows/Python%20application/badge.svg)
+![build](https://github.com/joonas-yoon/boj-source-saver/workflows/Build/badge.svg)
 
-Save your ACCEPTED codes on [BOJ](https://www.acmicpc.net)
+Download your ACCEPTED codes on [BOJ](https://www.acmicpc.net)
 
 ## Requirements
 
@@ -12,7 +12,7 @@ Save your ACCEPTED codes on [BOJ](https://www.acmicpc.net)
 
 ### Chrome WebDriver
 
-Download `chromedriver.exe` from https://sites.google.com/a/chromium.org/chromedriver/downloads
+Prepare and download `chromedriver.exe` from https://sites.google.com/a/chromium.org/chromedriver/downloads
 
 and place it in project directory.
 
