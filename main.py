@@ -1,8 +1,5 @@
-import os, sys, time
+import os, time
 import meta
-from selenium.common import exceptions
-
-from bs4 import BeautifulSoup
 from os.path import isfile, join
 from random import random
 from util import Chrome, get_text
@@ -13,39 +10,25 @@ if not os.path.isdir(SOURCE_DIR):
 source_files = [f for f in os.listdir(SOURCE_DIR) if isfile(join(SOURCE_DIR, f))]
 saved_pids = set([os.path.splitext(f)[0] for f in source_files])
 
-driver = Chrome().get_driver()
-driver.implicitly_wait(3)
+chrome = Chrome()
 
-driver.get('https://www.acmicpc.net/login')
-
-def parse_html(driver):
-    try:
-        _ = driver.window_handles
-    except (exceptions.WebDriverException, exceptions.NoSuchWindowException) as e:
-        print('[ERROR]', e, file=sys.stderr)
-        driver.quit()
-        raise SystemExit
-        sys.exit(0)
-    html = driver.page_source
-    soup = BeautifulSoup(html, 'html.parser')
-    return soup
-
+chrome.get('https://www.acmicpc.net/login')
 
 username = None
 while not username:
-    soup = parse_html(driver)
+    soup = chrome.parse_html()
     loginbar = soup.find('', class_='loginbar').find_all('li')
     if len(loginbar) > 4:
         username = get_text(loginbar[0])
         break
-    print("Waiting for login to BOJ...")
+    print('Waiting for login to BOJ...')
     time.sleep(5)
 
-print("Logined!")
+print(f'Logged in! Hello, {username}')
 
 
-driver.get(f'https://www.acmicpc.net/user/{username}')
-soup = parse_html(driver)
+chrome.get(f'https://www.acmicpc.net/user/{username}')
+soup = chrome.parse_html()
 solved_problems = soup.find_all('span', class_='problem_number')
 solved_pids = [get_text(pid) for pid in solved_problems]
 n_solved = len(solved_pids)
@@ -57,10 +40,10 @@ for current in range(n_solved):
         continue
     
     # List of accepted submissions
-    driver.get(f'https://www.acmicpc.net/status?problem_id={problem_id}&user_id={username}&result_id=4&from_mine=1')
+    chrome.get(f'https://www.acmicpc.net/status?problem_id={problem_id}&user_id={username}&result_id=4&from_mine=1')
 
     # Get latest submission id
-    soup = parse_html(driver)
+    soup = chrome.parse_html()
     submissions = soup.find(id='status-table').find_all('tr')
     sub_id = None
     for sub in submissions:
@@ -73,8 +56,8 @@ for current in range(n_solved):
         continue
 
     # Get page of latest source
-    driver.get(f'https://www.acmicpc.net/source/{sub_id}')
-    soup = parse_html(driver)
+    chrome.get(f'https://www.acmicpc.net/source/{sub_id}')
+    soup = chrome.parse_html()
     source = '\n'.join([get_text(line) for line in soup.find_all('pre', class_='CodeMirror-line')])
 
     # Detect file extension
@@ -99,4 +82,4 @@ for current in range(n_solved):
 
 
 time.sleep(10)
-driver.quit()
+chrome.quit()
