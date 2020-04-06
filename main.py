@@ -84,7 +84,7 @@ for current in range(n_solved):
         f.write(source)
 
     # Print log of process
-    print(f'Saved Problem {problem_id} Submission #{sub_id} ({language_name}) ({current}/{n_solved})')
+    print(f'Saved Problem {problem_id} Submission #{sub_id} ({language_name}) ({current + 1}/{n_solved})')
 
     time.sleep(random() * 2 + .5)
 
