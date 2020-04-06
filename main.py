@@ -5,7 +5,7 @@ import meta
 from bs4 import BeautifulSoup
 from os.path import isfile, join
 from random import random
-from util import Chrome, get_text
+from util import Chrome, get_text, print_log
 
 SOURCE_DIR = os.path.join('sources')
 if not os.path.isdir(SOURCE_DIR):
@@ -42,7 +42,7 @@ n_solved = len(solved_pids)
 for current in range(n_solved):
     problem_id = solved_pids[current]
     if problem_id in saved_pids:
-        print(f'Skipped Problem {problem_id} (reason: already saved)')
+        print_log(f'Skipped Problem {problem_id} (reason: already saved)')
         continue
     
     # List of accepted submissions
@@ -75,7 +75,7 @@ for current in range(n_solved):
         extension = meta.LANGUAGE_EXTENSION[language_name]
         detect_failed = not extension
     if detect_failed:
-        print(f'[Warn] Can not detected ext of {language_name}. it saved as .unknown')
+        print_log(f'[Warn] Can not detected ext of {language_name}. it saved as .unknown')
         extension = 'unknown'
 
     # Save as file
@@ -84,7 +84,7 @@ for current in range(n_solved):
         f.write(source)
 
     # Print log of process
-    print(f'Saved Problem {problem_id} Submission #{sub_id} ({language_name}) ({current + 1}/{n_solved})')
+    print_log(f'Saved Problem {problem_id} Submission #{sub_id} ({language_name}) ({current + 1}/{n_solved})')
 
     time.sleep(random() * 2 + .5)
 

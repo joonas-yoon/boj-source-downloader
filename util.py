@@ -1,7 +1,9 @@
 import os, bs4
+from datetime import datetime
 from selenium import webdriver
 
 APP_DIR = os.path.dirname(os.path.dirname('__filename__'))
+LOG_FILE = open('log.txt', 'w')
 
 
 def get_text(element):
@@ -10,6 +12,12 @@ def get_text(element):
     if type(element) == bs4.element.Tag:
         return element.text or ''
     return str(element) or ''
+
+
+def print_log(*args, **kwargs):
+    current_tm = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print(f'[{current_tm}]', *args, **kwargs)
+    LOG_FILE.write(f'[{current_tm}] ' + ' '.join([arg for arg in args]) + '\n')
 
 
 class Chrome:
