@@ -17,9 +17,10 @@ def get_text(element):
 
 
 def print_log(*args, **kwargs):
-    current_tm = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    print(f'[{current_tm}]', *args, **kwargs)
-    LOG_FILE.write(f'[{current_tm}] ' + ' '.join([arg for arg in args]) + '\n')
+    cur_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print(f'[{cur_time}]', *args, **kwargs)
+    args_str = ' '.join([str(arg) for arg in args])
+    LOG_FILE.write(f'[{cur_time}] {args_str}\n')
 
 
 class Chrome:
@@ -59,7 +60,8 @@ class Chrome:
         try:
             _ = self._driver.window_handles
         except (exceptions.WebDriverException, exceptions.NoSuchWindowException) as e:
-            print('[ERROR]', e, file=sys.stderr)
+            print_log('[ERROR]', e, file=sys.stderr)
             self._driver.quit()
             raise SystemExit
             sys.exit(0)
+        return False
