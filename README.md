@@ -4,6 +4,12 @@
 
 Download your ACCEPTED codes on [BOJ](https://www.acmicpc.net)
 
+## Release v1.1
+
+Available at https://github.com/joonas-yoon/boj-source-downloader/releases/tag/v1.1
+
+Download it and unzip, run `boj-source-downloader.exe`!
+
 ## Requirements
 
 - Chrome WebDriver
